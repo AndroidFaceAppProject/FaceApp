@@ -10,13 +10,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.manubhangu.faceapp.picLibrary">
 
-    <TextView
-        android:text="Boxes of pictures that were saved by the user"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imgPicture"
+        android:layout_above="@+id/opengallerybtn" />
+
+    <Button
+        android:text="Open Gallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:id="@+id/opengallerybtn"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="52dp"
-        android:id="@+id/textView7" />
+        android:layout_marginStart="39dp"
+        android:onClick="onOpenGalleryClick" />
+
+    <Button
+        android:text="Use Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/useimagebtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="34dp"
+        android:onClick="onUseImageClick" />
 </RelativeLayout>
