@@ -42,6 +42,5 @@ public class Drawing extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG).show();
         }
-
     }
 }
