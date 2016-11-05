@@ -15,10 +15,9 @@ public class Drawing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawing);
 
-        Intent intent = getIntent();
-        Bitmap bp = (Bitmap) intent.getParcelableExtra("bitmapimage");
-
         iv = (ImageView) findViewById(R.id.imageView);
+        Intent intent = getIntent();
+        Bitmap bp = intent.getParcelableExtra("bitmapimage");
         iv.setImageBitmap(bp);
     }
 }
