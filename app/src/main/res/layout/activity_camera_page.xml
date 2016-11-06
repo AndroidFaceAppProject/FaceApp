@@ -11,22 +11,30 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.manubhangu.faceapp.cameraPage">
 
-    <TextView
-        android:text="Camera will load up here to take a picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        android:layout_above="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="166dp" />
-
     <Button
         android:text="Take picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
         android:onClick="dispatchTakePictureIntent"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/imgPic2" />
 
+    <Button
+        android:text="Use Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/useimagebtn2"
+        android:onClick="sendImage"/>
+
+    <ImageView
+        android:layout_width="200pt"
+        android:layout_height="240pt"
+        android:id="@+id/imgPic2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
