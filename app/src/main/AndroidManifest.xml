@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.manubhangu.faceapp">
 
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +25,8 @@
         </activity>
         <activity android:name=".Drawing" />
         <activity android:name=".cameraPage" />
-        <activity android:name=".picLibrary"></activity>
+        <activity android:name=".picLibrary" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.manubhangu.faceapp"
@@ -28,8 +34,9 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
+
     </application>
 
 </manifest>
