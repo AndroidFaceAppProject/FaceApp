@@ -37,6 +37,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".DrawingTest"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"></activity>
     </application>
 
 </manifest>
