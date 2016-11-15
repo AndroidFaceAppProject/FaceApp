@@ -27,4 +27,10 @@ public class MainActivity extends AppCompatActivity {
         Intent picLibrary = new Intent(this, picLibrary.class);
         startActivity(picLibrary);
     }
+
+    public void testDraw(View view)
+    {
+        Intent testDraw = new Intent(this, DrawingTest.class);
+        startActivity(testDraw);
+    }
 }

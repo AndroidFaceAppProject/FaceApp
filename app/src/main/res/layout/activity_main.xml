@@ -41,4 +41,14 @@
         android:layout_alignParentEnd="true"
         android:onClick="picLibrary"/>
 
+    <Button
+        android:text="testDraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_toStartOf="@+id/button3"
+        android:layout_marginBottom="63dp"
+        android:id="@+id/test"
+        android:onClick="testDraw"/>
+
 </RelativeLayout>
