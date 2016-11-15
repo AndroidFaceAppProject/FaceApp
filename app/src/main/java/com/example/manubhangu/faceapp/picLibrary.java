@@ -38,9 +38,14 @@ public class picLibrary extends AppCompatActivity {
 
     public void onUseImageClick(View v){
 
-        Intent i = new Intent(this, Drawing.class);
-        i.putExtra("imageUri", imageUriToSend.toString());
-        startActivity(i);
+        if(imageUriToSend == null){
+            Toast.makeText(this, "No Image Selected!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Intent i = new Intent(this, Drawing.class);
+            i.putExtra("imageUri", imageUriToSend.toString());
+            startActivity(i);
+        }
 
     }
 
