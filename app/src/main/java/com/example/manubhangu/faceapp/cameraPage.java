@@ -50,6 +50,7 @@ public class cameraPage extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalStoragePublicDirectory("Android/data/com.example.manubhangu.faceapp/files/Pictures");
+        storageDir.mkdirs();
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -57,7 +58,8 @@ public class cameraPage extends AppCompatActivity {
         );
 
         // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
+        Log.v(TAG, ""+image.getAbsolutePath());
+        mCurrentPhotoPath =  image.getAbsolutePath();
         return image;
     }
 
@@ -73,6 +75,7 @@ public class cameraPage extends AppCompatActivity {
                 photoFile = createImageFile();
             } catch (IOException ex) {
                 // Error occurred while creating the File
+                Log.v(TAG, "FUCKKKK");
                 ex.printStackTrace();
             }
             // Continue only if the File was successfully created
