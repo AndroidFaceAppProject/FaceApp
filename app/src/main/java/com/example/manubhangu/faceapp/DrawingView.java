@@ -1,6 +1,9 @@
 package com.example.manubhangu.faceapp;
 
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.util.TypedValue;
 import android.view.View;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -29,6 +32,9 @@ public class DrawingView extends View {
     private Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
+    private float brushSize;
+    private float lastBrushSize;
+    private boolean erase = false;
 
 
     public DrawingView(Context context, AttributeSet attrs)
@@ -39,13 +45,20 @@ public class DrawingView extends View {
 
     private void setupDrawing()
     {
+        // initalize the brush size to be medium
+        brushSize = getResources().getInteger(R.integer.medium_size);
+
+        // keep a temp record of whatever the last size used was so we
+        // can reference back to it after an erase call
+        lastBrushSize = brushSize;
+
         //get drawing area setup for interaction
         drawPath = new Path();
         drawPaint = new Paint();
 
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(20);
+        drawPaint.setStrokeWidth(brushSize);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -72,16 +85,19 @@ public class DrawingView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         //detect user touch
         float touchX = event.getX(); // user touch coordinates x
-        float touchY = event.getY(); // user touchc coordinates y
+        float touchY = event.getY(); // user touch coordinates y
 
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:       // User presses down on screen here
+            // User presses down on screen here
+            case MotionEvent.ACTION_DOWN:
                 drawPath.moveTo(touchX, touchY);
                 break;
-            case MotionEvent.ACTION_MOVE:       // Draw a line from ACTION_DOWN to current X/Y coordinates of finger
+            // Draws a continous line from when the screen is touched to when the finger is lifted
+            case MotionEvent.ACTION_MOVE:
                 drawPath.lineTo(touchX, touchY);
                 break;
-            case MotionEvent.ACTION_UP:         // Stop drawing when finger is lifted off canvas.
+            // When the user lifts their finger off the screen
+            case MotionEvent.ACTION_UP:
                 drawCanvas.drawPath(drawPath, drawPaint);
                 drawPath.reset();
                 break;
@@ -98,5 +114,34 @@ public class DrawingView extends View {
         //set color
         paintColor = Color.parseColor(newColor);
         drawPaint.setColor(paintColor);
+    }
+
+    public void setBrushSize(float newSize)
+    {
+        float pixelAmount = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, newSize, getResources().getDisplayMetrics());
+        brushSize = pixelAmount;
+        drawPaint.setStrokeWidth(brushSize);
+    }
+
+    public float getLastBrushSize()
+    {
+        return lastBrushSize;
+    }
+
+    public void setLastBrushSize(float lastSize)
+    {
+        lastBrushSize = lastSize;
+    }
+
+    public void setErase(boolean isErase)
+    {
+        erase = isErase;
+
+        if(erase)
+        {
+            drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        } else {
+            drawPaint.setXfermode(null);
+        }
     }
 }
