@@ -42,7 +42,7 @@ public class picLibrary extends AppCompatActivity {
             Toast.makeText(this, "No Image Selected!", Toast.LENGTH_LONG).show();
         }
         else {
-            Intent i = new Intent(this, Drawing.class);
+            Intent i = new Intent(this, DrawingTest.class);
             i.putExtra("imageUri", imageUriToSend.toString());
             startActivity(i);
         }
@@ -96,8 +96,6 @@ public class picLibrary extends AppCompatActivity {
                     e.printStackTrace();
                     Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG).show();
                 }
-
-
             }
         }
     }

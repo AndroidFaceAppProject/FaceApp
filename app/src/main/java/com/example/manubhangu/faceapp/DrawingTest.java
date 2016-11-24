@@ -3,15 +3,23 @@ package com.example.manubhangu.faceapp;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.UUID;
 
 public class DrawingTest extends Activity implements OnClickListener {
@@ -24,11 +32,17 @@ public class DrawingTest extends Activity implements OnClickListener {
     private float smallBrush;
     private float mediumBrush;
     private float largeBrush;
+    Display display;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawing_test);
+        display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
 
         //retrieve the Linear Layout it is contained within
         LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
@@ -57,6 +71,31 @@ public class DrawingTest extends Activity implements OnClickListener {
 
         saveBtn = (ImageButton) findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(this);
+
+
+        Intent i = getIntent();
+        Uri myUri = Uri.parse(i.getStringExtra("imageUri"));
+
+        // declare a stream to read the image data from the sd card.
+        InputStream inputStream;
+
+        // when reading stream of data it can faill.... alot.
+        // we are getting an input stream, based on the uri of the image.
+        try {
+            inputStream = getContentResolver().openInputStream(myUri);
+
+            // get a bitmap from the stream
+            Bitmap image = BitmapFactory.decodeStream(inputStream);
+            //Bitmap imageResized = Bitmap.createScaledBitmap(image, (int)(image.getWidth() * 0.35), (int)(image.getHeight() * 0.35), true);
+            Bitmap imageResized = Bitmap.createScaledBitmap(image, width - 25, height - 325, true);
+            Bitmap mutableImage = imageResized.copy(Bitmap.Config.ARGB_8888, true);
+            drawView.setDrawCanvas(mutableImage);
+
+            // show the image to the user
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG).show();
+        }
     }
 
     /*

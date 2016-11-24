@@ -75,7 +75,6 @@ public class cameraPage extends AppCompatActivity {
                 photoFile = createImageFile();
             } catch (IOException ex) {
                 // Error occurred while creating the File
-                Log.v(TAG, "FUCKKKK");
                 ex.printStackTrace();
             }
             // Continue only if the File was successfully created
@@ -124,7 +123,7 @@ public class cameraPage extends AppCompatActivity {
 
     public void sendImage(View view)
     {
-        Intent i = new Intent(this, Drawing.class);
+        Intent i = new Intent(this, DrawingTest.class);
         i.putExtra("imageUri", imageUriToSend.toString());
         startActivity(i);
     }
