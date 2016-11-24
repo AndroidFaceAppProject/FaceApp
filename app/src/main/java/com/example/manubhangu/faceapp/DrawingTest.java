@@ -6,19 +6,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
@@ -29,6 +36,7 @@ public class DrawingTest extends Activity implements OnClickListener {
     private ImageButton drawBtn;
     private ImageButton eraseBtn;
     private ImageButton saveBtn;
+    private Button shareBtn;
     private float smallBrush;
     private float mediumBrush;
     private float largeBrush;
@@ -60,7 +68,6 @@ public class DrawingTest extends Activity implements OnClickListener {
         drawView = (DrawingView)findViewById(R.id.drawing);
         drawView.setBrushSize(mediumBrush);
 
-
         // getting our drawing button (the brush in the app)
         drawBtn = (ImageButton)findViewById(R.id.draw_btn);
         drawBtn.setOnClickListener(this);
@@ -71,6 +78,9 @@ public class DrawingTest extends Activity implements OnClickListener {
 
         saveBtn = (ImageButton) findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(this);
+
+        shareBtn = (Button) findViewById(R.id.shareButton);
+        shareBtn.setOnClickListener(this);
 
 
         Intent i = getIntent();
@@ -246,5 +256,38 @@ public class DrawingTest extends Activity implements OnClickListener {
             });
             saveDialog.show();
         }
+
+        if(view.getId() == R.id.shareButton)
+        {
+            startShare();
+        }
+    }
+
+    public void startShare(){
+        Bitmap bitmap = viewToBitmap(drawView, drawView.getWidth(), drawView.getHeight());
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/jpeg");
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "ImageDemo.jpg" );
+
+        try {
+            file.createNewFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(byteArrayOutputStream.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/ImageDemo.jpg"));
+        startActivity(Intent.createChooser(shareIntent, "Share Image"));
+    }
+
+    public static Bitmap viewToBitmap(View v, int width, int height){
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        v.draw(canvas);
+        return bitmap;
     }
 }

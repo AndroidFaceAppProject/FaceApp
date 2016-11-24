@@ -123,8 +123,14 @@ public class cameraPage extends AppCompatActivity {
 
     public void sendImage(View view)
     {
-        Intent i = new Intent(this, DrawingTest.class);
-        i.putExtra("imageUri", imageUriToSend.toString());
-        startActivity(i);
+        if(imageUriToSend == null){
+            Toast.makeText(this, "No Image Selected!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Intent i = new Intent(this, DrawingTest.class);
+            i.putExtra("imageUri", imageUriToSend.toString());
+            startActivity(i);
+        }
+
     }
 }
