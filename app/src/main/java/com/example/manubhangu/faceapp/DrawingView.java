@@ -66,12 +66,18 @@ public class DrawingView extends View {
         canvasPaint = new Paint(Paint.DITHER_FLAG);
     }
 
+    public void setDrawCanvas(Bitmap bp)
+    {
+        canvasBitmap = bp;
+        drawCanvas = new Canvas(canvasBitmap);
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         //view given size
         super.onSizeChanged(w, h, oldw, oldh);
-        canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        drawCanvas = new Canvas(canvasBitmap);
+        //canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        //drawCanvas = new Canvas(canvasBitmap);
     }
 
     @Override
