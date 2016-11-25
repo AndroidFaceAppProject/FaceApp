@@ -40,6 +40,14 @@
             android:layout_height="fill_parent"
             android:contentDescription="@string/save"
             android:src="@drawable/save" />
+
+        <Button
+            android:text="Share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shareButton"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
     <com.example.manubhangu.faceapp.DrawingView
