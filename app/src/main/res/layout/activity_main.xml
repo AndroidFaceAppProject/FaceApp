@@ -12,27 +12,25 @@
     tools:context="com.example.manubhangu.faceapp.MainActivity">
 
     <Button
-        android:text="Take Picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginBottom="29dp"
-        android:id="@+id/button2"
-        android:background="@drawable/rbutton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:onClick="takePicutre"/>
-
-    <Button
         android:text="Picture Library"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
         android:id="@+id/button3"
         android:background="@drawable/rbutton"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignParentEnd="true"
-        android:onClick="picLibrary"/>
+        android:onClick="picLibrary"
+        android:layout_marginBottom="225dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Take Picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:background="@drawable/rbutton"
+        android:onClick="takePicutre"
+        android:layout_marginBottom="32dp"
+        android:layout_above="@+id/button3"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
