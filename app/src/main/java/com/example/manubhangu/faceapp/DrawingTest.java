@@ -36,7 +36,7 @@ public class DrawingTest extends Activity implements OnClickListener {
     private ImageButton drawBtn;
     private ImageButton eraseBtn;
     private ImageButton saveBtn;
-    private Button shareBtn;
+    private ImageButton shareBtn;
     private float smallBrush;
     private float mediumBrush;
     private float largeBrush;
@@ -79,7 +79,7 @@ public class DrawingTest extends Activity implements OnClickListener {
         saveBtn = (ImageButton) findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(this);
 
-        shareBtn = (Button) findViewById(R.id.shareButton);
+        shareBtn = (ImageButton) findViewById(R.id.shareButton);
         shareBtn.setOnClickListener(this);
 
 
@@ -200,7 +200,7 @@ public class DrawingTest extends Activity implements OnClickListener {
                 @Override
                 public void onClick(View v) {
                     drawView.setErase(true);
-                    drawView.setBrushSize(smallBrush);
+                    drawView.setBrushSize(mediumBrush);
                     brushEraseDialog.dismiss();
                 }
             });

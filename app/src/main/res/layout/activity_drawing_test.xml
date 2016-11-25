@@ -16,13 +16,6 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/new_btn"
-            android:contentDescription="@string/start_new"
-            android:src="@drawable/new_drawing"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:id="@+id/draw_btn"
             android:contentDescription="@string/brush"
             android:src="@drawable/brush"/>
@@ -41,12 +34,11 @@
             android:contentDescription="@string/save"
             android:src="@drawable/save" />
 
-        <Button
-            android:text="Share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
             android:id="@+id/shareButton"
-            android:layout_weight="1" />
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:src="@drawable/sharebtn" />
 
     </LinearLayout>
 

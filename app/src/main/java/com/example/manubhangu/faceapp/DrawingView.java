@@ -1,8 +1,6 @@
 package com.example.manubhangu.faceapp;
 
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.util.TypedValue;
 import android.view.View;
 import android.content.Context;
@@ -142,12 +140,9 @@ public class DrawingView extends View {
     public void setErase(boolean isErase)
     {
         erase = isErase;
-
         if(erase)
         {
-            drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        } else {
-            drawPaint.setXfermode(null);
+            drawPaint.setColor(Color.WHITE);
         }
     }
 }
